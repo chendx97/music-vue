@@ -5,7 +5,12 @@
 </template>
 
 <script>
+import api from '@/api';
+
 export default {
-  name: 'home'
+  name: 'home',
+  mounted() {
+    api.getRecommendSongList();
+  },
 };
 </script>
