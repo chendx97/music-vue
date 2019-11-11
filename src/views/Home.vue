@@ -11,6 +11,6 @@ export default {
   name: 'home',
   mounted() {
     // api.getRecommendSongList();
-  },
+  }
 }
 </script>
