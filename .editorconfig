@@ -6,5 +6,5 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 max_line_length = 100
 linebreak-style = windows
-semi = never
+semi = 0
 comma-dangle = never
