@@ -1,8 +1,12 @@
 <template>
 	<div class="home">
-		<div class="tab-wrap">
-			<div>推荐</div>
-			<div>个人中心</div>
+		<div class="header">
+			<div class="setting">set</div>
+			<div class="tab-wrap">
+				<div>推荐</div>
+				<div>个人中心</div>
+			</div>
+			<div class="search">search</div>
 		</div>
 	</div>
 </template>
