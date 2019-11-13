@@ -8,12 +8,16 @@
 </template>
 
 <script>
-import api from '@/api'
+// import api from '@/api'
 
 export default {
 	name: 'home',
 	mounted () {
-		// api.getRecommendSongList();
+		// api.getRecommendSongList(res => {
+		// 	console.log(res)
+		// 	this.result = res.data.result
+		// }, err => {
+		// })
 	}
 }
 </script>
