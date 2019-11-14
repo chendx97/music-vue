@@ -2,13 +2,22 @@
 	<div class="home">
 		<div class="header">
 			<div class="header-menu">
-				<div class="setting">set</div>
+				<div class="setting">
+					<i class="iconfont icon-toggle"></i>
+				</div>
 				<div class="tab-wrap">
 					<div :class="currentTab ? '' : 'active'" @click="switchTab(0)">推荐</div>
 					<div :class="currentTab ? 'active' : ''" @click="switchTab(1)">个人中心</div>
 				</div>
-				<div class="search">search</div>
+				<div class="search">
+					<i class="iconfont icon-huaban"></i>
+				</div>
 			</div>
+			<swipe class="my-swipe" :speed="3000">
+				<swipe-item class="slide1"></swipe-item>
+				<swipe-item class="slide2"></swipe-item>
+				<swipe-item class="slide3"></swipe-item>
+			</swipe>
 		</div>
 		<div class="body">{{currentTab ? personal : recommand}}</div>
 	</div>
@@ -16,7 +25,6 @@
 
 <script>
 // import api from '@/api'
-
 export default {
 	name: 'home',
 	data () {
@@ -67,6 +75,21 @@ export default {
 				}
 			}
 		}
+
+		.my-swipe {
+			width: 100%;
+			background: #888873;
+			border-radius: 1.3vw;
+		}
+	}
+}
+</style>
+<style lang="stylus">
+.mint-swipe-indicator {
+	background: rgba(255, 255, 255, 0.8) !important;
+
+	&.is-active {
+		background: rgba(255, 255, 255, 0.5) !important;
 	}
 }
 </style>
