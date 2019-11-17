@@ -35,11 +35,12 @@ export default {
 		}
 	},
 	mounted () {
-		// api.getRecommendSongList(res => {
-		// 	console.log(res)
-		// 	this.result = res.data.result
-		// }, err => {
-		// })
+		api.getRecommendSongList(res => {
+			console.log(res)
+			this.result = res.data.result
+		}, err => {
+			console.log(err)
+		})
 	},
 	methods: {
 		switchTab (idx) {
