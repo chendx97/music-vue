@@ -14,9 +14,11 @@
 				</div>
 			</div>
 			<swipe class="my-swipe" :speed="3000">
-				<swipe-item class="slide1"></swipe-item>
-				<swipe-item class="slide2"></swipe-item>
-				<swipe-item class="slide3"></swipe-item>
+				<template v-for="(banner, idx) in bannerList">
+					<swipe-item :class="`slide${idx}`" :key="idx">
+						<img :src="banner.pic" />
+					</swipe-item>
+				</template>
 			</swipe>
 		</div>
 		<div class="body">{{currentTab ? personal : recommand}}</div>
@@ -24,22 +26,26 @@
 </template>
 
 <script>
-// import api from '@/api'
+import api from '@/api/serverRequests'
+
 export default {
 	name: 'home',
 	data () {
 		return {
 			currentTab: 0,
+			bannerList: [],
 			recommand: 'aa',
 			personal: 'bb'
 		}
 	},
 	mounted () {
-		// api.getRecommendSongList(res => {
-		// 	console.log(res)
-		// 	this.result = res.data.result
-		// }, err => {
-		// })
+		api.getBannerInfo(1, res => {
+			if (res.data.code === 200) {
+				this.bannerList = res.data.banners
+			}
+		}, err => {
+			console.log(err)
+		})
 	},
 	methods: {
 		switchTab (idx) {
@@ -80,6 +86,11 @@ export default {
 			width: 100%;
 			background: #888873;
 			border-radius: 1.3vw;
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
 		}
 	}
 }
@@ -89,7 +100,7 @@ export default {
 	background: rgba(255, 255, 255, 0.8) !important;
 
 	&.is-active {
-		background: rgba(255, 255, 255, 0.5) !important;
+		background: rgba(255, 255, 255, 0.2) !important;
 	}
 }
 </style>
