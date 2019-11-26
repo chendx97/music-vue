@@ -35,6 +35,10 @@
 					</div>
 				</template>
 			</div>
+			<div class="recommend-list">
+				<p class="recomment-title">推荐歌单</p>
+				<div>xx</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -103,7 +107,6 @@ export default {
 				width: 40%;
 				display: flex;
 				justify-content: space-between;
-				font-size: 4vw;
 				color: #f18686;
 
 				.active {
@@ -141,14 +144,30 @@ export default {
 
 			i {
 				color: #fff;
-				font-size: 22px;
 			}
 		}
 
 		.under-text {
-			color: #333;
 			padding-top: 2vw;
 			text-align: center;
+		}
+	}
+
+	.recommend-list {
+		padding: 0 4.2vw;
+
+		.recomment-title {
+			text-align: left;
+
+			&:before {
+				content: '';
+				display: inline-block;
+				margin-right: 1.3vw;
+				width: 0.6vw;
+				height: 3.7vw;
+				vertical-align: middle;
+				background: #d43c33;
+			}
 		}
 	}
 }
