@@ -13,15 +13,29 @@
 					<i class="iconfont icon-huaban"></i>
 				</div>
 			</div>
-			<swipe class="my-swipe" :speed="3000">
-				<template v-for="(banner, idx) in bannerList">
-					<swipe-item :class="`slide${idx}`" :key="idx">
-						<img :src="banner.pic" />
-					</swipe-item>
-				</template>
-			</swipe>
+			<template v-if="currentTab">personal</template>
+			<template v-else>
+				<swipe class="my-swipe" :speed="3000">
+					<template v-for="(banner, idx) in bannerList">
+						<swipe-item :class="`slide${idx}`" :key="idx">
+							<img :src="banner.pic" />
+						</swipe-item>
+					</template>
+				</swipe>
+			</template>
 		</div>
-		<div class="body">{{currentTab ? personal : recommand}}</div>
+		<div class="body">
+			<div class="menu">
+				<template v-for="(item, idx) in menuList">
+					<div class="menu-item" :key="idx">
+						<div class="item-wrap">
+							<i :class="`iconfont ${item.icon}`"></i>
+						</div>
+						<div class="under-text">{{item.title}}</div>
+					</div>
+				</template>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -34,6 +48,24 @@ export default {
 		return {
 			currentTab: 0,
 			bannerList: [],
+			menuList: [
+				{
+					icon: 'icon-erji',
+					title: '私人FM'
+				},
+				{
+					icon: 'icon-tuijian',
+					title: '每日推荐'
+				},
+				{
+					icon: 'icon-gedan',
+					title: '歌单'
+				},
+				{
+					icon: 'icon-paixingbang',
+					title: '排行榜'
+				}
+			],
 			recommand: 'aa',
 			personal: 'bb'
 		}
@@ -91,6 +123,34 @@ export default {
 				width: 100%;
 				height: 100%;
 			}
+		}
+	}
+
+	.menu {
+		margin-top: 10vw;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		padding: 5.3vw 4.2vw;
+
+		.item-wrap {
+			height: 13.3vw;
+			width: 13.3vw;
+			line-height: 13.3vw;
+			background: #d43c33;
+			border-radius: 50%;
+			margin: 0 10px;
+
+			i {
+				color: #fff;
+				font-size: 22px;
+			}
+		}
+
+		.under-text {
+			color: #333;
+			padding-top: 2vw;
+			text-align: center;
 		}
 	}
 }
