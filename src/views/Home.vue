@@ -65,9 +65,7 @@ export default {
 					icon: 'icon-paixingbang',
 					title: '排行榜'
 				}
-			],
-			recommand: 'aa',
-			personal: 'bb'
+			]
 		}
 	},
 	mounted () {
