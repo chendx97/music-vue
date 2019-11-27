@@ -46,6 +46,12 @@
 					</template>
 				</div>
 			</div>
+			<div class="list-over">已经到底啦~</div>
+			<transition name="el-fade-in">
+				<div class="back-top" v-show="isShowBackTop" @click="scrollToTop">
+					<i class="iconfont icon-huidingbu"></i>
+				</div>
+			</transition>
 		</div>
 	</div>
 </template>
@@ -77,7 +83,8 @@ export default {
 					title: '排行榜'
 				}
 			],
-			recommendList: []
+			recommendList: [],
+			isShowBackTop: false
 		}
 	},
 	mounted () {
@@ -95,10 +102,37 @@ export default {
 		}, err => {
 			console.log(err)
 		})
+		window.addEventListener('scroll', this.handleScroll)
+	},
+	beforeDestroy () {
+		window.removeEventListener('scroll', this.handleScroll)
 	},
 	methods: {
 		switchTab (idx) {
 			this.currentTab = idx
+		},
+		handleScroll () {
+			const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+				|| document.body.scrollTop
+			if (scrollTop > 500) {
+				this.isShowBackTop = true
+			} else {
+				this.isShowBackTop = false
+			}
+		},
+		scrollToTop () {
+			let scroll = document.documentElement.scrollTop
+			let timer = null
+			cancelAnimationFrame(timer)
+			timer = requestAnimationFrame(function fn () {
+				if (scroll > 0) {
+					scroll -= 50
+					document.documentElement.scrollTop = scroll
+					timer = requestAnimationFrame(fn)
+				} else {
+					cancelAnimationFrame(timer)
+				}
+			})
 		}
 	}
 }
@@ -205,6 +239,32 @@ export default {
 					text-align: left;
 				}
 			}
+		}
+	}
+
+	.list-over {
+		font-size: 3.2vw;
+		height: 7.3vw;
+		line-height: 7.3vw;
+		text-align: center;
+	}
+
+	.back-top {
+		position: fixed;
+		bottom: 50px;
+		right: 5%;
+		width: 50px;
+		height: 50px;
+		border: 1px solid silver;
+		border-radius: 50%;
+		background-color: hsla(0, 0%, 100%, 0.85);
+		line-height: 50px;
+		z-index: 100;
+		transition: 0.3s;
+
+		i {
+			color: silver;
+			font-size: 25px;
 		}
 	}
 }
