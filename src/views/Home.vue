@@ -69,13 +69,22 @@ export default {
 					icon: 'icon-paixingbang',
 					title: '排行榜'
 				}
-			]
+			],
+			recommendList: []
 		}
 	},
 	mounted () {
 		api.getBannerInfo(1, res => {
 			if (res.data.code === 200) {
 				this.bannerList = res.data.banners
+			}
+		}, err => {
+			console.log(err)
+		})
+		api.getRecommendInfo(res => {
+			if (res.data.code === 200) {
+				this.recommendList = res.data.result
+				console.log(this.recommendList)
 			}
 		}, err => {
 			console.log(err)
