@@ -13,6 +13,13 @@
 					<i class="iconfont icon-huaban"></i>
 				</div>
 			</div>
+			<div class="header-menu2" ref="header2">
+				<div class="address">杭州</div>
+				<div class="search"></div>
+				<div class="personnal">
+					<i class="iconfont icon-gerenzhongxinwoderenwubiaozhuntouxianxingcopy"></i>
+				</div>
+			</div>
 			<template v-if="currentTab">personal</template>
 			<template v-else>
 				<swipe class="my-swipe" :speed="3000">
@@ -119,6 +126,11 @@ export default {
 			} else {
 				this.isShowBackTop = false
 			}
+			if (scrollTop > 5) {
+				this.$refs.header2.style.transform = 'translateY(0vw)'
+			} else {
+				this.$refs.header2.style.transform = 'translateY(-9.6vw)'
+			}
 		},
 		scrollToTop () {
 			let scroll = document.documentElement.scrollTop
@@ -161,6 +173,34 @@ export default {
 				.active {
 					color: #fff;
 				}
+			}
+		}
+
+		.header-menu2 {
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+			height: 11.3vw;
+			line-height: 11.3vw;
+			padding: 0 5vw;
+			box-sizing: border-box;
+			background: #d43c33;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 100;
+			transform: translateY(-9.6vw);
+			transition: all 0.5s ease;
+
+			.search {
+				text-align: center;
+				color: #999999;
+				width: 70%;
+				height: 6.7vw;
+				line-height: 6.7vw;
+				border-radius: 3.3vw;
+				background: #f5f5f5;
+				align-self: center;
 			}
 		}
 
