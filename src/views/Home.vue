@@ -36,8 +36,15 @@
 				</template>
 			</div>
 			<div class="recommend-list">
-				<p class="recomment-title">推荐歌单</p>
-				<div>xx</div>
+				<p class="recommend-title">推荐歌单</p>
+				<div class="recommend-wrap">
+					<template v-for="(song, idx) in recommendList">
+						<div class="recommend-item" :key="idx">
+							<img :src="song.picUrl" alt />
+							<p class="recommend-desc">{{song.name}}</p>
+						</div>
+					</template>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -84,7 +91,6 @@ export default {
 		api.getRecommendInfo(res => {
 			if (res.data.code === 200) {
 				this.recommendList = res.data.result
-				console.log(this.recommendList)
 			}
 		}, err => {
 			console.log(err)
@@ -165,7 +171,7 @@ export default {
 	.recommend-list {
 		padding: 0 4.2vw;
 
-		.recomment-title {
+		.recommend-title {
 			text-align: left;
 
 			&:before {
@@ -176,6 +182,28 @@ export default {
 				height: 3.7vw;
 				vertical-align: middle;
 				background: #d43c33;
+			}
+		}
+
+		.recommend-wrap {
+			display: flex;
+			flex-wrap: wrap;
+
+			.recommend-item {
+				width: 32%;
+				margin-right: 2%;
+
+				&:nth-of-type(3n + 3) {
+					margin-right: 0;
+				}
+
+				img {
+					width: 100%;
+				}
+
+				.recommend-desc {
+					text-align: left;
+				}
 			}
 		}
 	}
