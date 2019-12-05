@@ -114,7 +114,7 @@ export default {
 					this.searchResult = response[resultKeys[this.searchType]]
 				}
 			}, () => {
-				this.$message.error('netowrk error')
+				console.log('netowrk error')
 			})
 		}
 	}

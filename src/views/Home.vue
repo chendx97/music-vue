@@ -100,14 +100,14 @@ export default {
 				this.bannerList = res.data.banners
 			}
 		}, () => {
-			this.$message.error('netowrk error')
+			console.log('netowrk error')
 		})
 		api.getRecommendInfo(res => {
 			if (res.data.code === 200) {
 				this.recommendList = res.data.result
 			}
 		}, () => {
-			this.$message.error('netowrk error')
+			console.log('netowrk error')
 		})
 		window.addEventListener('scroll', this.handleScroll)
 	},
