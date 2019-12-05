@@ -15,7 +15,18 @@
 			</div>
 			<div class="search-result">
 				<template v-for="(result, idx) in searchResult">
-					<div class="result-item" :key="idx">{{result}}</div>
+					<div class="result-item" :key="idx">
+						<div class="item-left">
+							<img :src="result.img1v1Url" alt />
+						</div>
+						<div class="item-right">
+							<p>{{result.name}}</p>
+							<p class="achieve-count">
+								<span v-if="result.albumSize !== 0">专辑{{result.albumSize}}</span>
+								<span v-if="result.mvSize !== 0">mv{{result.mvSize}}</span>
+							</p>
+						</div>
+					</div>
 				</template>
 			</div>
 		</div>
@@ -150,6 +161,38 @@ export default {
 				box-sizing: border-box;
 				border: 1px solid rgb(169, 169, 169);
 				border-radius: 1vw;
+			}
+		}
+
+		.search-result {
+			.result-item {
+				display: flex;
+				margin-bottom: 5px;
+
+				.item-left {
+					width: 16vw;
+					display: flex;
+					align-items: center;
+					padding: 0 10px;
+
+					img {
+						width: 100%;
+						border-radius: 50%;
+					}
+				}
+
+				.item-right {
+					width: 84vw;
+					text-align: left;
+					padding-left: 3vw;
+					box-sizing: border-box;
+
+					.achieve-count {
+						span:first-child {
+							margin-right: 5px;
+						}
+					}
+				}
 			}
 		}
 	}
