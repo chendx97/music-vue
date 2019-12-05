@@ -5,6 +5,9 @@ const request = {
   },
   getRecommendInfo: (succ, fail) => {
     api._get(`/personalized`, succ, fail)
+  },
+  getSearchInfo: (params, succ, fail) => {
+    api._get(`/search?keywords=${params.keywords}&type=${params.type}`, succ, fail)
   }
 }
 export default request

@@ -10,12 +10,12 @@
 					<div :class="currentTab ? 'active' : ''" @click="switchTab(1)">个人中心</div>
 				</div>
 				<div class="search">
-					<i class="iconfont icon-huaban"></i>
+					<i @click="goSearch" class="iconfont icon-huaban"></i>
 				</div>
 			</div>
 			<div class="header-menu2" ref="header2">
 				<div class="address">杭州</div>
-				<div class="search"></div>
+				<div class="search" @click="goSearch">请输入关键词</div>
 				<div class="personnal">
 					<i class="iconfont icon-gerenzhongxinwoderenwubiaozhuntouxianxingcopy"></i>
 				</div>
@@ -99,15 +99,15 @@ export default {
 			if (res.data.code === 200) {
 				this.bannerList = res.data.banners
 			}
-		}, err => {
-			console.log(err)
+		}, () => {
+			this.$message.error('netowrk error')
 		})
 		api.getRecommendInfo(res => {
 			if (res.data.code === 200) {
 				this.recommendList = res.data.result
 			}
-		}, err => {
-			console.log(err)
+		}, () => {
+			this.$message.error('netowrk error')
 		})
 		window.addEventListener('scroll', this.handleScroll)
 	},
@@ -145,6 +145,9 @@ export default {
 					cancelAnimationFrame(timer)
 				}
 			})
+		},
+		goSearch () {
+			this.$router.push('/search')
 		}
 	}
 }
@@ -152,6 +155,8 @@ export default {
 
 <style lang="stylus" scoped>
 .home {
+	background: #fff;
+
 	.header {
 		background: #d43c33;
 		color: #fff;
