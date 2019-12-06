@@ -6,14 +6,14 @@
 		</div>
 		<div class="body">
 			<div class="search-input">
-				<select @change="e => this.searchType = this.searchOptions[e.target.selectedIndex].value">
+				<select @change="changeSelect">
 					<template v-for="(item, idx) in searchOptions">
 						<option :value="item.value" :key="idx">{{item.label}}</option>
 					</template>
 				</select>
 				<input v-model="searchKey" @keyup.enter="getSearchResult" placeholder="请输入搜索关键词" />
 			</div>
-			<div class="search-result">
+			<div class="search-result" v-if="searchType === 100">
 				<template v-for="(result, idx) in searchResult">
 					<div class="result-item" :key="idx">
 						<div class="item-left">
@@ -26,6 +26,18 @@
 								<span v-if="result.mvSize !== 0">mv{{result.mvSize}}</span>
 							</p>
 						</div>
+					</div>
+				</template>
+			</div>
+			<div class="search-result" v-if="searchType === 1">
+				<template v-for="(result, idx) in searchResult">
+					<div :key="idx">
+						<p>{{result.name}}</p>
+						<p>
+							<span>歌手{{result.artists[0].name}}</span>
+							<span>专辑{{result.album.name}}</span>
+							<span>时长{{(result.duration / 1000 / 60).toFixed(2)}}</span>
+						</p>
 					</div>
 				</template>
 			</div>
@@ -88,12 +100,16 @@ export default {
 		}
 	},
 	methods: {
+		changeSelect (e) {
+			this.searchType = this.searchOptions[e.target.selectedIndex].value
+			this.getSearchResult()
+		},
 		getSearchResult () {
 			if (!this.searchKey) {
 				return
 			}
 			const resultKeys = {
-				1: 'playlists',
+				1: 'songs',
 				10: 'albums',
 				100: 'artists',
 				1000: 'playlists',
@@ -165,6 +181,8 @@ export default {
 		}
 
 		.search-result {
+			text-align: left;
+
 			.result-item {
 				display: flex;
 				margin-bottom: 5px;
@@ -183,7 +201,6 @@ export default {
 
 				.item-right {
 					width: 84vw;
-					text-align: left;
 					padding-left: 3vw;
 					box-sizing: border-box;
 
