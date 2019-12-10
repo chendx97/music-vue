@@ -1,7 +1,7 @@
 import axios from 'axios'
 const http = axios.create({
   timeout: 5000,
-  baseURL: process.env.http_base_url,
+  // baseURL: process.env.http_base_url,
   headers: { 'content-type': 'application/x-www-form-urlencoded' },
   withCredentials: true
 })
